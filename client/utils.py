@@ -2,7 +2,7 @@ import streamlit as st
 def sidebarHidden():
 	st.sidebar.markdown("""
 		<style>
-			#root > div:nth-child(1) > div.withScreencast > div > div > div > section.css-1vencpc {
+			section[data-testid="stSidebar"] {
 				display: none;
 			}
 		</style>
