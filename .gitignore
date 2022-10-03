@@ -130,3 +130,4 @@ dmypy.json
 
 # ignoring testing files
 tests/
+.DS_Store
