@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MBox } from '../boxes';
 import { Title } from '../text';
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
@@ -27,7 +27,14 @@ const Mapper: React.FC = () => {
   })
 
   const [map, setMap] = React.useState(null)
-
+  const [zoom, setZoom] = useState(14)
+  
+  useEffect(() => {
+    setTimeout(() => {
+        setZoom(15)
+    }, 300);
+  }, [])
+  
   const onLoad = React.useCallback(function callback(map:any) {
     const bounds = new window.google.maps.LatLngBounds(center);
     map.fitBounds(bounds);
@@ -39,10 +46,11 @@ const Mapper: React.FC = () => {
   }, [])
 
   return isLoaded ? (
+    
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
-      zoom={0}
+      zoom={zoom}
       onLoad={onLoad}
       onUnmount={onUnmount}
     >

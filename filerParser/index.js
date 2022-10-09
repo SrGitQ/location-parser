@@ -11,13 +11,28 @@ const puppeteer = require('puppeteer');
     }
   });
   const page = await browser.newPage();
-  await page.setDefaultNavigationTimeout(60000);
-  await page.goto('http://localhost:3000/', {timeout: 40000});
+  await page.goto('http://localhost:3000/', {timeout: 60000});
   await page.evaluate(async() => {
     await new Promise(function(resolve) { 
            setTimeout(resolve, 4000)
     });
-});
+    const toClick = document.querySelector('#root > div > div > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(2) > div > div > div:nth-child(14) > div > div:nth-child(3) > div > button:nth-child(3)');
+    toClick.click();
+    await new Promise(function(resolve) {setTimeout(resolve, 1000)});
+    toClick.click();
+    await new Promise(function(resolve) {setTimeout(resolve, 1000)});
+    toClick.click();
+    await new Promise(function(resolve) {setTimeout(resolve, 1000)});
+    toClick.click();
+    await new Promise(function(resolve) {setTimeout(resolve, 1000)});
+    toClick.click();
+    await new Promise(function(resolve) {setTimeout(resolve, 1000)});
+    toClick.click();
+    await new Promise(function(resolve) {setTimeout(resolve, 1000)});
+    toClick.click();
+    await new Promise(function(resolve) {setTimeout(resolve, 1000)});
+  });
+  
   await page.screenshot({ path: 'fullpage.png', fullPage: true });
 
   await browser.close();
