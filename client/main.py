@@ -4,12 +4,24 @@ from utils import sidebarHidden
 
 #config streamlit to wide mode
 st.set_page_config(layout="wide")
+st.markdown('''
+	<style>
+		button[kind="primary"]{
+			background-color:rgb(225,93,107);
+		}
+		div.block-container{
+			padding:10px;
+		}
+	</style>
+''', unsafe_allow_html=True)
+
+
 
 if 'place' not in st.session_state:
 	st.session_state.place = 'main'
 
 st.title("Home")
-if st.button("list"):
+if st.button("list", key='next1'):
 	switch_page("list")
 st.write(st.session_state.place)
 st.markdown('''
