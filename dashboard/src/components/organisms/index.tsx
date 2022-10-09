@@ -4,6 +4,8 @@ import Map from "./Map";
 import PeopleSays from "./PeopleSays";
 import HeadsUp from "./HeadsUp";
 import Visitor from "./Visitor";
+import BusyDays from "./BusyDays";
+import BusyHours from "./BusyHours";
 
 export {
     PlaceInformation,
@@ -11,5 +13,7 @@ export {
     Map,
     PeopleSays,
     HeadsUp,
-    Visitor
+    Visitor,
+    BusyDays,
+    BusyHours,
 };
