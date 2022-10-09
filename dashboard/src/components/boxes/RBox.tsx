@@ -6,7 +6,7 @@ type Props = {
 
 const RBox: React.FC<Props> = (props) => {
     return (
-        <div className='h-56 bg-neutral-100 rounded-lg p-6'>
+        <div className='h-56 bg-zinc-100 rounded-lg p-6'>
             {props.children}
         </div>
     );

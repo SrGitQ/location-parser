@@ -1,3 +1,5 @@
 import Title from './Title';
+import GText from './GText';
+import Bullet from './Bullet';
 
-export { Title };
+export { Title, GText, Bullet };
