@@ -1,5 +1,6 @@
 import React from 'react';
 import { RBox, MBox } from './boxes';
+import { Title } from './text';
 
 const BasicInformation: React.FC = () => {
 	return (
@@ -9,11 +10,11 @@ const BasicInformation: React.FC = () => {
 					basic information
 				</RBox>
 				<RBox>
-					rating
+					<Title title='Rating'/>
 				</RBox>
 			</div>
 			<MBox>
-				map
+				<Title title='Route'/>
 			</MBox>
 		</div>
 	);
