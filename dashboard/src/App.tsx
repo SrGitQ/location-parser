@@ -2,6 +2,7 @@ import React from 'react';
 import Layout from './Layout';
 import Place from './utils/types';
 
+
 const App: React.FC = () => {
 
 	const local:Place = {
@@ -16,7 +17,7 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <Layout place={local}/>
+        <Layout place={local}/>
     </div>
   );
 }

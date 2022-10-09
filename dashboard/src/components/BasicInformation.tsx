@@ -1,8 +1,7 @@
 import React from 'react';
-import { MBox } from './boxes';
-import { Title} from './text';
 import { PlaceInformation, Rating } from './organisms';
 import Place from '../utils/types';
+import Map from './organisms/Map';
 
 type Props = {
 	place: Place;
@@ -15,9 +14,9 @@ const BasicInformation: React.FC<Props> = ({place}) => {
 				<PlaceInformation place={place}/>
 				<Rating reviews={place.reviews} rating={place.rating}/>
 			</div>
-			<MBox>
-				<Title title='Route'/>
-			</MBox>
+			<div>
+				<Map />
+			</div>
 		</div>
 	);
 };
