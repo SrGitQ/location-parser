@@ -6,5 +6,7 @@ type Place = {
 	phone: string;
 	type: string;
 	status: string;
+    reviews: Array<number>;
+    rating: number;
 };
 export default Place;

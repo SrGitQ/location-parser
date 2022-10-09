@@ -1,7 +1,7 @@
 import React from 'react';
-import { RBox, MBox } from './boxes';
+import { MBox } from './boxes';
 import { Title} from './text';
-import { PlaceInformation } from './organisms';
+import { PlaceInformation, Rating } from './organisms';
 import Place from '../utils/types';
 
 type Props = {
@@ -13,9 +13,7 @@ const BasicInformation: React.FC<Props> = ({place}) => {
 		<div className='grid grid-cols-2 m-6 gap-6'>
 			<div className='grid gap-6'>
 				<PlaceInformation place={place}/>
-				<RBox>
-					<Title title='Rating'/>
-				</RBox>
+				<Rating reviews={place.reviews} rating={place.rating}/>
 			</div>
 			<MBox>
 				<Title title='Route'/>

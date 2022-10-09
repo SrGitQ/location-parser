@@ -9,9 +9,11 @@ const App: React.FC = () => {
 		address: '3 North Trenton St. Burnsville, MN 55337',
 		phone: '+51 999 140 5395',
 		type: 'Restaurant',
-		status: 'Open'
+		status: 'Open',
+    rating:4.5,
+    reviews:[13, 10, 2, 3, 4]
 	};
-  
+
   return (
     <div>
       <Layout place={local}/>
