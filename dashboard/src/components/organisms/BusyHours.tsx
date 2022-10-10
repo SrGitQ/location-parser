@@ -1,5 +1,4 @@
 import React from 'react';
-import { MBox } from '../boxes';
 import { Title } from '../text';
 import {
   Chart as ChartJS,
@@ -37,23 +36,27 @@ export const options = {
     maintainAspectRatio: false
 };
 
-type HourData = {
-    hour: string;
-    people: number;
+type HourTendency = {
+	hour: string;
+	people: number;
+}
+
+type BusyHours = {
+	hours: HourTendency[];
 }
 
 type Props = {
-    hours: Array<HourData>
+    busyHours: BusyHours | null;
 }
 
-const BusyHours: React.FC <Props> = ({hours}) => {
+const BusyHours: React.FC <Props> = ({busyHours}) => {
     const labels = ['8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'];
 
     const data = {
         labels,
         datasets: [
           {
-            data: hours.map((item) => item.people),
+            data: busyHours?.hours.map((item) => item.people),
             backgroundColor: '#d9d9d9',
             borderRadius: 4,
           },

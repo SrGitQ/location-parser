@@ -10,7 +10,7 @@ type Props = {
 }
 
 const PlaceInformation: React.FC <Props> = ({place}) => {
-	const image = (<img className='rounded-full h-36 w-36' src='https://www.collinsdictionary.com/images/full/restaurant_135621509_1000.jpg?version=4.0.279' alt='swipe'/>);
+	const image = (<img className='rounded-full h-36 w-36' src={place.img?.src} alt='swipe'/>);
 	const information = (
 		<div>
 			<Bullet>

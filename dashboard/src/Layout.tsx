@@ -10,9 +10,9 @@ const Layout: React.FC <Props> = ({place}) => {
     return (
       <div className="grid-rows-4">
         <BasicInformation place={place}/>
-        <Metrics />
-        <Charts />
-        <Competency />
+        <Metrics wordCloud={place.wordCloud} sentiment={place.sentiment} visitorData={place.visitorData}/>
+        <Charts busyDays={place.busyDays} busyHours={place.busyHours}/>
+        <Competency competency={place.competency}/>
       </div>
     )
 }

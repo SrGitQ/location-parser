@@ -9,42 +9,9 @@ const containerStyle = {
     margin: 'auto',
     borderRadius: '10px',
   };
-  
-const center = {
-  lat: 20.9863018,
-  lng: -89.733405
-};
 
-const position = {
-  lat: 20.9878394,
-  lng: -89.7368373
-}
 
-const Mapper: React.FC = () => {
-  const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-    googleMapsApiKey: "AIzaSyBz_O735ogufoIPFQ39_IwJY6rhF67N-RE"
-  })
-
-  const [map, setMap] = React.useState(null)
-  const [zoom, setZoom] = useState(14)
-  
-  useEffect(() => {
-    setTimeout(() => {
-        setZoom(15)
-    }, 300);
-  }, [])
-  
-  const onLoad = React.useCallback(function callback(map:any) {
-    const bounds = new window.google.maps.LatLngBounds(center);
-    map.fitBounds(bounds);
-    setMap(map)
-  }, [])
-
-  const onUnmount = React.useCallback(function callback(map:any) {
-    setMap(null)
-  }, [])
-  const exampleMapStyles:any = [
+const exampleMapStyles:any = [
     {
         "featureType": "all",
         "elementType": "labels.text.fill",
@@ -298,30 +265,63 @@ const Mapper: React.FC = () => {
         ]
     }
 ];
+
+
+type Location = {
+	lat: number;
+	lng: number;
+}
+
+type Props = {
+    location: Location;
+}
+
+const Mapper: React.FC <Props> = ({location}) => {
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: "AIzaSyBz_O735ogufoIPFQ39_IwJY6rhF67N-RE"
+  })
+
+  const [map, setMap] = React.useState(null)
+  const [zoom, setZoom] = useState(14)
+  
+  useEffect(() => {
+    setTimeout(() => {
+        setZoom(15)
+    }, 300);
+  }, [])
+  
+  const onLoad = React.useCallback(function callback(map:any) {
+    const bounds = new window.google.maps.LatLngBounds(location);
+    map.fitBounds(bounds);
+    setMap(map)
+  }, [])
+
+  const onUnmount = React.useCallback(function callback(map:any) {
+    setMap(null)
+  }, [])
   return isLoaded ? (
     
     <GoogleMap
       mapContainerStyle={containerStyle}
-      center={center}
+      center={location}
       zoom={zoom}
       onLoad={onLoad}
       onUnmount={onUnmount}
       options={{ styles: exampleMapStyles }}
     >
-      { /* Child components, such as markers, info windows, etc. */ }
-      
         <Marker
-          position={position}
+          position={location}
         />
     </GoogleMap>
 ) : <></>
 }
 
-const Map: React.FC = () => {
+const Map: React.FC <Props> = ({location}) => {
     return (
         <MBox>
             <Title title='Map'/>
-            <Mapper/>
+            <Mapper location={location}/>
         </MBox>
     );
 };

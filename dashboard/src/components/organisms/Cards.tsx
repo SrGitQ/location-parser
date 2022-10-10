@@ -3,22 +3,11 @@ import Place from '../../utils/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 
-const local:Place = {
-    name: 'Metropolitan Ave',
-    address: '3 North Trenton St. Burnsville, MN 55337',
-    phone: '+51 999 140 5395',
-    type: 'Restaurant',
-    status: 'Open',
-rating:4.5,
-reviews:[13, 10, 2, 3, 4]
-};
-type Props = {
-	place: Place
+type BulletsProps = {
+    place: Place;
 }
 
-
-
-const BulletPlaceInformtion: React.FC <Props> = ({place}) => {
+const BulletPlaceInformtion: React.FC <BulletsProps> = ({place}) => {
 	const image = (<img className='rounded-full h-16 w-16' src='https://www.collinsdictionary.com/images/full/restaurant_135621509_1000.jpg?version=4.0.279' alt='swipe'/>);
 	const information = (
 		<div className=''>
@@ -47,34 +36,32 @@ const BulletPlaceInformtion: React.FC <Props> = ({place}) => {
 	);
 };
 
-const Card: React.FC = () => {
+type CardInfo = {
+    place: Place;
+}
+
+const Card: React.FC <CardInfo> = ({place}) => {
     return (
         <div className='h-[130px] bg-zinc-200 w-[300px] p-1 rounded-lg'>
-            <BulletPlaceInformtion place={local}/>
+            <BulletPlaceInformtion place={place}/>
         </div>
     );
 };
 
+type CardsComp = {
+    competency: Place[] | null;
+}
 
-const Cards: React.FC = () => {
+const Cards: React.FC <CardsComp> = ({competency}) => {
     const layout = (
         <div className='grid grid-cols-4 gap-3 m-4 h-[360px]'>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
+            {competency?.map((place, index) => (
+                <Card place={place} key={index}/>
+            ))}
         </div>
     )
 
-    return (
-        <>
-            {layout}
-        </>
-    );
+    return (<>{layout}</>);
 };
 
 export default Cards;

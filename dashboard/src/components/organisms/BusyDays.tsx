@@ -37,23 +37,27 @@ export const options = {
     maintainAspectRatio: false
 };
 
-type DayData = {
-    day: string;
-    people: number;
+type DayTendency = {
+	day: string;
+	people: number;
+}
+
+type BusyDays = {
+	days: DayTendency[];
 }
 
 type Props = {
-    days: Array<DayData>
+    busyDays: BusyDays | null;
 }
 
-const BusyDays: React.FC <Props> = ({days}) => {
+const BusyDays: React.FC <Props> = ({busyDays}) => {
     const labels = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
     const data = {
         labels,
         datasets: [
           {
-            data: days.map((item) => item.people),
+            data: busyDays?.days.map((item) => item.people),
             backgroundColor: '#d9d9d9',
             borderRadius: 10,
           },

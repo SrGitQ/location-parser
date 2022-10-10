@@ -1,32 +1,34 @@
 import React from 'react';
 import { PeopleSays, HeadsUp, Visitor } from './organisms';
 
-const words = [
-	{
-		text: 'told',
-	  	value: 64,
-	},
-	{
-		text: 'mistake',
-	  	value: 11,
-	},
-	{
-		text: 'thought',
-	  	value: 16,
-	},
-	{
-		text: 'bad',
-	  	value: 17,
-	},
-  ]
+type WordCount = {
+	text: string;
+	value: number;
+};
 
-const Metrics: React.FC = () => {
+type Sentiment = {
+	positive: number;
+	neutral: number;
+	negative: number;
+}
+
+type VisitorData = {
+	url: string;
+}
+
+type Props = {
+	wordCloud: WordCount[] | null;
+	sentiment: Sentiment | null;
+	visitorData: VisitorData;
+}
+
+const Metrics: React.FC <Props> = ({wordCloud, sentiment, visitorData}) => {
   return (
 		<div className='grid grid-cols-2 bg-color-red m-6 gap-6'>
-			<PeopleSays words={words}/>
+			<PeopleSays wordCloud={wordCloud}/>
 			<div className='grid gap-6'>
-				<HeadsUp qal={[20, 40, 30]}/>
-				<Visitor />
+				<HeadsUp sentiment={sentiment}/>
+				<Visitor visitorData={visitorData}/>
 			</div>
 		</div>
   );

@@ -15,7 +15,7 @@ const BasicInformation: React.FC<Props> = ({place}) => {
 				<Rating reviews={place.reviews} rating={place.rating}/>
 			</div>
 			<div>
-				<Map />
+				<Map location={place.location}/>
 			</div>
 		</div>
 	);

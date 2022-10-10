@@ -4,11 +4,17 @@ import { regular } from '@fortawesome/fontawesome-svg-core/import.macro'
 import { Title } from '../text';
 import { RBox } from '../boxes';
 
-type Props = {
-    qal: Array<number>;
+type Sentiment = {
+	positive: number;
+	neutral: number;
+	negative: number;
 }
 
-const HeadsUp: React.FC <Props> = ({qal}) => {
+type Props = {
+	sentiment: Sentiment | null;
+}
+
+const HeadsUp: React.FC <Props> = ({sentiment}) => {
 	return (
 
 		<RBox>
@@ -17,23 +23,24 @@ const HeadsUp: React.FC <Props> = ({qal}) => {
 		    	<div className='flex justify-center'>
 		    		<div className='text-center'>
 		    			<FontAwesomeIcon icon={regular('face-frown')} className='text-red-600 text-7xl'/>
-		    			<div className='text-neutral-400'>{qal[0]}%</div>
+		    			<div className='text-neutral-400'>{sentiment?.negative}%</div>
 		    		</div>
 		    	</div>
 		    	<div className='flex justify-center'>
 		    		<div className='text-center'>
 		    			<FontAwesomeIcon icon={regular('face-meh')} className='text-amber-400 text-7xl'/>
-		    			<div className='text-neutral-400'>{qal[1]}%</div>
+		    			<div className='text-neutral-400'>{sentiment?.neutral}%</div>
 		    		</div>
 		    	</div>
 		    	<div className='flex justify-center'>
 		    		<div className='text-center'>
 		    			<FontAwesomeIcon icon={regular('face-smile')} className='text-green-600 text-7xl'/>
-		    			<div className='text-neutral-400'>{qal[2]}%</div>
+		    			<div className='text-neutral-400'>{sentiment?.positive}%</div>
 		    		</div>
 		    	</div>
 		    </div>
         </RBox>
 	);
 }
+
 export default HeadsUp;

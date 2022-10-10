@@ -3,8 +3,13 @@ import { MBox } from '../boxes';
 import { Title } from '../text';
 import ReactWordcloud from 'react-wordcloud';
 
+type WordCount = {
+	text: string;
+	value: number;
+};
+
 type Props = {
-    words: any;
+    wordCloud: WordCount[] | null;
 }
 
 const options:any = {
@@ -19,13 +24,13 @@ const options:any = {
 	deterministic: true,
 };
 
-const PeopleSays: React.FC <Props> = ({words}) => {
+const PeopleSays: React.FC <Props> = ({wordCloud}) => {
     return (
         <MBox>
             <Title title='People says'/>
             <ReactWordcloud
                 options={options}
-                words={words} 
+                words={wordCloud ? wordCloud : []} 
             />
         </MBox>
     );

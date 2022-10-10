@@ -44,11 +44,11 @@ export const options = {
 
 
 type Props = {
-    reviews: Array<number>;
+    reviews: Array<number> | null;
     rating: number;
 }
 type Solo = {
-    reviews: Array<number>;
+    reviews: Array<number> | null;
 }
 
 const Chart: React.FC <Solo> = ({reviews}) => {
@@ -61,7 +61,7 @@ const Chart: React.FC <Solo> = ({reviews}) => {
     }
 
     const labels = ['5', '4', '3', '2', '1'];
-    let porc = percentageParser(reviews)
+    let porc = percentageParser(reviews ? reviews : [0, 0, 0, 0, 0]);
 
     const data = {
         labels,
@@ -98,7 +98,7 @@ const Rating: React.FC <Props> = ({reviews, rating}) => {
                         <GText title={rating.toString()}/>
                         <FontAwesomeIcon icon={solid('star')} className='ml-6 mt-2 text-2xl text-amber-400'/>
                     </div>
-                    <div className='text-neutral-400 text-sm'>{reviews.reduce((a,b)=>a+b,0)} Reviews</div>
+                    <div className='text-neutral-400 text-sm'>{reviews?.reduce((a,b)=>a+b,0)} Reviews</div>
                 </div>
             </div>
         </RBox>
