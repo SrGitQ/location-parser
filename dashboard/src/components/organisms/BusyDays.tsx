@@ -54,20 +54,20 @@ const BusyDays: React.FC <Props> = ({days}) => {
         datasets: [
           {
             data: days.map((item) => item.people),
-            backgroundColor: '#b7b9bc',
+            backgroundColor: '#d9d9d9',
             borderRadius: 10,
           },
         ],
     };
     return (
-        <MBox>
+        <div className='h-[25rem] bg-zinc-100 rounded-lg p-6'>
             <Title title='Busy days'/>
             <div className='flex justify-center h-[400px] p-10'>
-                <div className='h-80 w-[90%]'>
+                <div className='h-64 w-[90%]'>
                     <Bar data={data} options={options}/>
                 </div>
             </div>
-        </MBox>
+        </div>
     );
 };
 

@@ -54,20 +54,20 @@ const BusyHours: React.FC <Props> = ({hours}) => {
         datasets: [
           {
             data: hours.map((item) => item.people),
-            backgroundColor: '#b7b9bc',
+            backgroundColor: '#d9d9d9',
             borderRadius: 4,
           },
         ],
     };
     return (
-        <MBox>
+        <div className='h-[25rem] bg-zinc-100 rounded-lg p-6'>
             <Title title='Busy hours'/>
             <div className='flex justify-center h-[400px] p-10'>
-                <div className='h-80 w-[90%]'>
+                <div className='h-64 w-[90%]'>
                     <Bar data={data} options={options}/>
                 </div>
             </div>
-        </MBox>
+        </div>
     );
 };
 
