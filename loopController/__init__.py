@@ -1,11 +1,15 @@
-from flask import Flask;
+from flask import Flask, send_from_directory;
 from loopController.variables import Place;
 from bson.json_util import dumps
 from flask_cors import CORS, cross_origin
+from flask import send_file
+import requests
+import img2pdf
+from PIL import Image
 
 data = {
 	'img':{'src':'https://www.collinsdictionary.com/images/full/restaurant_135621509_1000.jpg?version=4.0.279'},
-	'name':'La reposteria de flor',
+	'name':'La reposteria de Osiris',
 	'type':'Restaurant',
 	'phone':'+51 999 140 5395',
 	'status':'Closed',
@@ -34,3 +38,14 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 def index():
 	return place.data()
 
+@app.route('/file/<path:path>')
+def file(path):
+  if path != 'fullpage.png':
+    res = requests.get('http://localhost:4000/')
+    image = Image.open('./loopController/static/fullpage.png')
+    pdf_bytes = img2pdf.convert(image.filename)
+    file = open('./loopController/static/dashboard.pdf', "wb")
+    file.write(pdf_bytes)
+    image.close()
+    file.close()
+  return send_file('./static/dashboard.pdf', as_attachment=True)#send_from_directory("./static/", path)

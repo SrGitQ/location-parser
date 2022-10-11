@@ -34,6 +34,9 @@ export const options = {
             },
         },
     },
+    animation: {
+        duration: 0,
+    },
     maintainAspectRatio: false
 };
 

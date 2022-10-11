@@ -1,6 +1,7 @@
 import streamlit as st
 from utils import sidebarHidden
 from streamlit_extras.switch_page_button import switch_page
+import requests
 
 def writeR(text):
   st.markdown(text, unsafe_allow_html=True)
@@ -9,6 +10,9 @@ st.set_page_config(layout="wide")
 
 st.markdown("""
   <style>
+    a {
+      text-decoration: none;
+    }
     header[data-testid="stHeader"]{
       display: none;
     }
@@ -43,6 +47,10 @@ writeR("""
   <iframe src="http://localhost:3000/" height="1900px" width="1400px" ></iframe>
 """)
 
-
+writeR("""
+  <div class="row-widget stButton" style="width: 467px;"><a href="http://localhost:5000/file/dashboard.pdf"><button kind="primary" class="css-6kekos edgvbvh9">Download</button></a></div>
+  <br>
+  <br>
+""")
 
 sidebarHidden()
