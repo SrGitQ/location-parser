@@ -22,18 +22,15 @@ data = {
 }
 
 place:Place = Place(data);
-
 place.competency = [Place(data), Place(data), Place(data), Place(data)]
 
 app = Flask(__name__);
-
 cors = CORS(app)
-
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 #The main route will return the current state of the app
 @app.route('/')
 @cross_origin()
 def index():
-	return place.data()#f'';<style>body{{background-color: #000; color: #fff;}}</style><span>{}</span>
+	return place.data()
 
