@@ -18,7 +18,7 @@ class Place:
 		except:
 			self.busyDays:BusyDays = None
 		try:
-			self.competency:list = [self.Place(p) for p in place['competency']]
+			self.competency:list = place['competency']
 		except:
 			self.competency:list = None
 		try:
@@ -49,7 +49,7 @@ class Place:
 			'location':self.location.data(),
 			'address':self.address,
 			'visitorData':self.visitorData.data(),
-			'competency':self.competency,
+			'competency':[pl.data() for pl in self.competency] if self.competency else None,
 			'busyDays':self.busyDays.data(),
 			'sentiment':self.sentiment.data(),
 			'wordCloud':[word.data() for word in self.wordCloud],
@@ -80,7 +80,9 @@ class VisitorData:
 		self.url:str = visitorData['url']
 	
 	def data(self):
-		return self.url
+		return {
+			'url':self.url,
+		}
 
 class DayTendency:
 	def __init__(self, day:dict):
@@ -98,7 +100,9 @@ class BusyDays:
 		self.days:list = [DayTendency(day) for day in busyDays['days']]
 	
 	def data(self):
-		return [day.data() for day in self.days]
+		return {
+			'days':[day.data() for day in self.days],
+		}
 
 class HoursTendency:
 	def __init__(self, hour:dict):
@@ -116,7 +120,9 @@ class BusyHours:
 		self.hours:list = [HoursTendency(hour) for hour in busyHours['hours']]
 	
 	def data(self):
-		return [hour.data() for hour in self.hours]
+		return {
+			'hours':[hour.data() for hour in self.hours],
+		}
 
 class WordCount:
 	def __init__(self, word:dict):

@@ -284,7 +284,7 @@ const Mapper: React.FC <Props> = ({location}) => {
 
   const [map, setMap] = React.useState(null)
   const [zoom, setZoom] = useState(14)
-  
+
   useEffect(() => {
     setTimeout(() => {
         setZoom(15)
