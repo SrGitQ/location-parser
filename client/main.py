@@ -42,7 +42,7 @@ if 'places' not in st.session_state:
 col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
 with col2:
   if st.button("", key='1'):
-    switch_page("list")
+    switch_page("compareSearch")
   writeR('<p style="text-align: center; color:#8e9297; font-weight:bold; font-size:20px;">Compare places</p>')
 with col3:
   if st.button("", key='2'):

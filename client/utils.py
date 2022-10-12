@@ -43,6 +43,22 @@ def headerRenderWithButton(page):
     writeR("""
     <h1 style="text-align: center; font-family:helvetica">IMaP</h1>
     """)
+  with col_3:
+    writeR("""
+      <style>
+        div[data-testid="stHorizontalBlock"] div[data-testid="column"]:last-child div.stButton{
+          padding-left: 10rem;
+          padding-top: 1.5rem;
+          border-radius: 30px;
+          color: #b7b9bc;
+        }
+        div[data-testid="stHorizontalBlock"] div[data-testid="column"]:last-child div.stButton button{
+          border-radius: 30px;
+        }
+      </style>
+    """)
+    if st.button('⌂'):
+      switch_page('main')
 
 def headerRender(markdown):
   col_1, col_2, col_3 = st.columns([1, 1, 1])

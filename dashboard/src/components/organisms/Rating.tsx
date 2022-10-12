@@ -57,7 +57,7 @@ const Chart: React.FC <Solo> = ({reviews}) => {
         let percentage = data.map((item) => {
             return (item / total);
         });
-        return percentage;
+        return percentage.reverse();
     }
 
     const labels = ['5', '4', '3', '2', '1'];

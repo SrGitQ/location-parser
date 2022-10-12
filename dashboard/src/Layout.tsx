@@ -13,7 +13,7 @@ const Layout: React.FC <Props> = ({place}) => {
         <BasicInformation place={place}/>
         <Metrics wordCloud={place.wordCloud} sentiment={place.sentiment} visitorData={place.visitorData}/>
         <Charts busyDays={place.busyDays} busyHours={place.busyHours}/>
-        <Competency competency={place.competency}/>
+        {/* <Competency competency={place.competency}/> */}
       </div>
     ) : (<></>)
 }

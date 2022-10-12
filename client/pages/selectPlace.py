@@ -17,7 +17,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 styleCharger()
 
-headerRenderWithButton('searchPlace')
+headerRenderWithButton('compareSearch')
 
 def go_to_place(id_):
   card = st.empty()
@@ -61,10 +61,10 @@ with col2:
           <p>{}</p>
           <p>{}</p>
         <div>
-      """.format(place['name'], place['formatted_address'], place['types'][0]))
-      if st.button('Go', key=f'{id}_place'):
-        requests.get(f'http://localhost:5000/place/{place["place_id"]}')
-        switch_page('place')
+      """.format(place['name'], place['address'], place['type']))
+      if st.button('select', key=f'{id}_place'):
+        requests.get(f'http://localhost:5000/place/{id}')
+        switch_page('comparative')
 
 
 sidebarHidden()

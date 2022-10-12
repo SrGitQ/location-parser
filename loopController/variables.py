@@ -3,8 +3,10 @@ class Place:
 	def __init__(self, place:any):
 		self.name:str = place['name']
 		self.type:str = place['type']
+		self.place_id:str = place['place_id']
 		self.phone:str = place['phone']
 		self.status:str = place['status']
+		self.url:str = place['url']
 		self.rating:str = place['rating']
 		self.address:str = place['address']
 		self.location:Location = Location(place['location'])
@@ -43,6 +45,8 @@ class Place:
 			'img':self.img.data(),
 			'name':self.name,
 			'type':self.type,
+			'url':self.url,
+			'place_id':self.place_id,
 			'phone':self.phone,
 			'status':self.status,
 			'rating':self.rating,
@@ -50,11 +54,11 @@ class Place:
 			'address':self.address,
 			'visitorData':self.visitorData.data(),
 			'competency':[pl.data() for pl in self.competency] if self.competency else None,
-			'busyDays':self.busyDays.data(),
+			'busyDays':self.busyDays.data() if self.busyDays else {'days':[]},
 			'sentiment':self.sentiment.data(),
-			'wordCloud':[word.data() for word in self.wordCloud],
+			'wordCloud':[word.data() for word in self.wordCloud] if self.wordCloud else [],
 			'reviews':self.reviews,
-			'busyHours':self.busyHours.data(),
+			'busyHours':self.busyHours.data() if self.busyHours else {'hours':[]},
 		}
 
 class Img:

@@ -45,6 +45,7 @@ type Place = {
 	name: string;
 	type: string;
 	phone: string;
+    place_id:string;
 	status: string;
     rating: number;
 	address: string;

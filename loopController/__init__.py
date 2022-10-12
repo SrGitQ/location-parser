@@ -7,12 +7,15 @@ import requests
 import img2pdf
 from PIL import Image
 
+from loopController.dataRequester import placeTransform
+
 data = {
 	'img':{'src':'https://www.collinsdictionary.com/images/full/restaurant_135621509_1000.jpg?version=4.0.279'},
 	'name':'La reposteria de Osiris',
 	'type':'Restaurant',
 	'phone':'+51 999 140 5395',
 	'status':'Closed',
+  'place_id':'ChIJN1t_tDeuEmsRUsoyG83frY4',
 	'rating':4.5,
 	'location':{'lat':20.9863018, 'lng':-89.733405},
 	'address':'3 North Trenton St. Burnsville, MN 55337',
@@ -29,6 +32,7 @@ data1 = {
 	'name':'Otra cosa',
 	'type':'Restaurant',
 	'phone':'+51 999 140 5395',
+  'place_id':'ChIJN1t_tDeuEmsRUsoyG83frY4',
 	'status':'Closed',
 	'rating':4.5,
 	'location':{'lat':20.9863018, 'lng':-89.733405},
@@ -46,6 +50,7 @@ data2 = {
 	'name':'Otra cosa 2',
 	'type':'Restaurant',
 	'phone':'+51 999 140 5395',
+  'place_id':'ChIJN1t_tDeuEmsRUsoyG83frY4',
 	'status':'Closed',
 	'rating':4.5,
 	'location':{'lat':20.9863018, 'lng':-89.733405},
@@ -62,8 +67,8 @@ data2 = {
 #place:Place = Place(data);
 #place.competency = [Place(data), Place(data), Place(data), Place(data)]
 
-places = [Place(data), Place(data1), Place(data2)]
-current_search_place = Place(data);
+places = None
+current_search_place = None;
 
 app = Flask(__name__);
 cors = CORS(app)
@@ -91,12 +96,26 @@ def file(path):
 def icons(path):
   return send_from_directory("./static/icons/", path)
 
+from loopController.dataRequester import OneBusinessMain
 #modify the current place
 @app.route('/place/<id>')
 def set_place(id):
-  global current_search_place 
-  current_search_place = places[int(id)]
-  return 'Data changed'
+  global current_search_place
+  db = []
+  #search in the database
+  if id in db:
+    #if it is the database, return that data
+    return {}
+  else:
+    #else, scrap the data process return and save it
+    print('scraping... '+id)
+    data = OneBusinessMain(id)
+    print('scraped', data)
+    current_search_place = placeTransform(data)
+    requests.get(f'http://localhost:4000/img?url={current_search_place.data()["url"].split("=")[1]}&id={id}')
+    print('')
+    return 'ok'
+
 
 @app.route('/place')
 def get_current_place():

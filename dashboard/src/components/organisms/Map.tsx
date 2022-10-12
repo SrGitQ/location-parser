@@ -321,6 +321,7 @@ const Map: React.FC <Props> = ({location}) => {
     return (
         <MBox>
             <Title title='Map'/>
+            <div className='h-[0.5rem]'></div>
             <Mapper location={location}/>
         </MBox>
     );
