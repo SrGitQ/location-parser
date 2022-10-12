@@ -26,11 +26,14 @@ def distribution(hours):
   for day in aux_data:
     general = 0
     for hour in day['time']:
-      time = hour['hour']
-      percentage = hour['percentage']
-      general += percentage
-      if percentage > aux_hours[time]:
-        aux_hours[time] = percentage
+      try:
+        time = hour['hour']
+        percentage = hour['percentage']
+        general += percentage
+        if percentage > aux_hours[time]:
+          aux_hours[time] = percentage
+      except:
+        pass
     aux_days[day['day']] = general
     
 

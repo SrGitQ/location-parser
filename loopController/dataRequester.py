@@ -207,7 +207,7 @@ def placeTransform(data):
   else:
     website = ''
   
-  if len(data['reviews']) > 0:
+  if 'reviews' in data:
     words = countWords(data['reviews'])
   else:
     words = []

@@ -1,7 +1,9 @@
+import re
 import streamlit as st
 from utils import writeR, sidebarHidden, styleCharger, headerRenderWithButton
 from streamlit_extras.switch_page_button import switch_page
 import requests
+import json
 
 st.markdown("""
   <style>
@@ -17,7 +19,33 @@ st.markdown("""
 """, unsafe_allow_html=True)
 styleCharger()
 
-headerRenderWithButton('compareSearch')
+col_1, col_2, col_3 = st.columns([1, 1, 1])
+with col_1:
+  if st.button("<"):
+    requests.get('http://localhost:5000/compare/reset')
+    switch_page('compareSearch')
+
+with col_2:
+  writeR("""
+  <h1 style="text-align: center; font-family:helvetica">IMaP</h1>
+  """)
+with col_3:
+  writeR("""
+    <style>
+      div[data-testid="stHorizontalBlock"] div[data-testid="column"]:last-child div.stButton{
+        padding-left: 10rem;
+        padding-top: 1.5rem;
+        border-radius: 30px;
+        color: #b7b9bc;
+      }
+      div[data-testid="stHorizontalBlock"] div[data-testid="column"]:last-child div.stButton button{
+        border-radius: 30px;
+      }
+    </style>
+  """)
+  if st.button('⌂'):
+    requests.get('http://localhost:5000/compare/reset')
+    switch_page('main')
 
 def go_to_place(id_):
   card = st.empty()
@@ -25,6 +53,37 @@ def go_to_place(id_):
     st.write('hello'+id_)
 
 col1, col2, col3 = st.columns([1, 1, 1])
+
+def getMultipleBusiness(query,lat,lon,radius):
+  """
+  Function to search places given a query using text_search from places API
+  """
+  # Position
+  location = f'{lat},{lon}'
+
+  # API GOOGLE
+  API_KEY='AIzaSyCFXJsJDyC32kIJ2AHu2IMF1-osa6uKwSo'
+  
+  # Endpoint
+  endpoint_url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?'
+
+  # Parameters
+  params = {
+      'type': query,
+      'location': location,
+      'radius': radius,
+      'key': API_KEY
+  }
+
+  # Request
+  response = requests.get(endpoint_url, params = params)
+
+  # Results
+  results = json.loads(response.content)
+
+  
+  return results['results']
+
 with col2:
   writeR("""
     <style>
@@ -52,8 +111,9 @@ with col2:
       }
     </style>
   """)
-  writeR('<br><br><p style="text-align: center; font-family:helvetica; color:#8e9297">Select an option...</p><br>')
-  for id, place in enumerate(st.session_state.search_place):
+  writeR('<br><br><p style="text-align: center; font-family:helvetica; color:#8e9297">Select the main place...</p><br>')
+  current = []
+  for id, place in enumerate(st.session_state.search_compare):
     content = st.empty()
     with content.container():
       writeR("""
@@ -62,10 +122,16 @@ with col2:
           <p>{}</p>
           <p>{}</p>
         <div>
-      """.format(place['name'], place['address'], place['type']))
+      """.format(place['name'], place['formatted_address'], place['types'][0]))
       if st.button('select', key=f'{id}_place'):
-        requests.get(f'http://localhost:5000/place/{id}')
-        switch_page('comparative')
+        #save this id in the list to scrape in the server
+        requests.get(f'http://localhost:5000/compare/{place["place_id"]}')
+        #then search by the type and add the id in the list
+        for type in st.session_state['types']:
+          current += getMultipleBusiness(type, place['geometry']['location']['lat'], place['geometry']['location']['lng'], st.session_state['radius'])[:3]
+        for id in current:
+          requests.get(f'http://localhost:5000/compare/{id["place_id"]}')
+        requests.get('http://localhost:5000/compare/scrape')
 
 
 sidebarHidden()

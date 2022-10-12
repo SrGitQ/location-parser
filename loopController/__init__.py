@@ -141,3 +141,61 @@ def get_current_place():
 @app.route('/places')
 def places_sender():
   return [p.data() for p in places]
+
+stack_places = []
+
+@app.route('/compare/<id>')
+def startComp(id):
+  global stack_places
+  if id not in stack_places:
+    stack_places.append(id)
+  print(stack_places)
+  return 'ok'
+
+pool_places = []
+@app.route('/compare/reset')
+def resetComp():
+  global pool_places
+  global stack_places
+  stack_places = []
+  pool_places = []
+  return 'ok'
+
+
+import multiprocessing as mp
+
+def MulpleBusinessMain(ids):
+    pool_obj = mp.Pool(20)
+    placesResults = pool_obj.map(OneBusinessMain,ids)
+    return placesResults
+
+@app.route('/compare/scrape')
+def scrapeComp():
+  print('scraping...')
+  new_ids = []
+  global current_search_place
+  for i, id in enumerate(stack_places):
+    # check if the place is in the database
+    data = collec.find_one({'place_id':id})
+    if data:
+      #if it is the database, return that data
+      if i == 0:
+        current_search_place= Place(data)
+      else:
+        pool_places.append(Place(data))
+    else:
+      new_ids.append(id)
+  
+  #scrap the new ids in parallel
+  print('scraping new ids...')
+  pls = MulpleBusinessMain(new_ids)
+  print('start saving...')
+  for pl in pls:
+    p_m = placeTransform(pl)
+    pool_places.append(p_m)
+    requests.get(f'http://localhost:4000/img?url={p_m.data()["url"].split("=")[1]}&id={p_m.data()["place_id"]}')
+    collec.insert_one(p_m.data())
+    if 'website' in p_m.data():
+      generateQRCode(p_m.data()['website'], p_m.data()["place_id"])
+
+  return 'ok'
