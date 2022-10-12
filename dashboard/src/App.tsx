@@ -8,7 +8,7 @@ const App: React.FC = () => {
 	const [place, setPlace] = React.useState<Place | null>(null);
 
 	useEffect(() => {
-		fetch('http://localhost:5000/')
+		fetch('http://localhost:5000/place')
 			.then(res => res.json())
 			.then((place) => {
 				setPlace(place);
