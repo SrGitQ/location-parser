@@ -7,9 +7,9 @@ qr = qrcode.QRCode(
 	border=5
 )
 
-def generateQRCode(link:str):
+def generateQRCode(link:str, id:str):
   # Adding data
   qr.add_data(link)
   qr.make(fit=True)
-  img = qr.make_image(fill='black', back_color='white')
-  img.save('./static/qrcode.png')
+  img = qr.make_image(fill_color='rgb(153,153,153)', back_color='rgb(244,244,245)')
+  img.save(f'./loopController/static/codes/{id}_QR.png')

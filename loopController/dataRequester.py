@@ -211,7 +211,7 @@ def placeTransform(data):
     words = countWords(data['reviews'])
   else:
     words = []
-
+  print('from data request: ', data, words)
   return Place({
 	  'img':{'src':f'http://localhost:5000/static/imgs/{data["place_id"]}.png'},
     'place_id': data['place_id'],

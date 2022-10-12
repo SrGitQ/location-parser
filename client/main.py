@@ -11,8 +11,8 @@ headerRender('<br><br><p style="text-align: center; font-family:helvetica; color
 writeR("""
   <style>
     div[data-testid="stHorizontalBlock"]>div:has(button):nth-of-type(2) .stButton {
-      background: url("http://localhost:5000/icons/icon3.png");
-      height: 320px;
+      background: url("http://localhost:5000/icons/icon6.png");
+      height: 300px;
       background-size:cover;
     }
     div[data-testid="stHorizontalBlock"]>div:has(button):nth-of-type(3) .stButton {
@@ -43,6 +43,7 @@ col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
 with col2:
   if st.button("", key='1'):
     switch_page("compareSearch")
+  st.markdown('<br>', unsafe_allow_html=True)
   writeR('<p style="text-align: center; color:#8e9297; font-weight:bold; font-size:20px;">Compare places</p>')
 with col3:
   if st.button("", key='2'):

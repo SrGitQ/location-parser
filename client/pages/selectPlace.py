@@ -52,6 +52,7 @@ with col2:
       }
     </style>
   """)
+  writeR('<br><br><p style="text-align: center; font-family:helvetica; color:#8e9297">Select an option...</p><br>')
   for id, place in enumerate(st.session_state.search_place):
     content = st.empty()
     with content.container():

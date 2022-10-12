@@ -35,7 +35,7 @@ with col_2:
   """)
 
 writeR("""
-  <iframe src="http://localhost:3000/" height="1920px" width="1400px" ></iframe>
+  <iframe src="http://localhost:3000/" height="1530px" width="1400px" ></iframe>
 """)
 
 writeR("""

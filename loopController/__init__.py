@@ -96,16 +96,30 @@ def file(path):
 def icons(path):
   return send_from_directory("./static/icons/", path)
 
+@app.route('/codes/<path:path>')
+def codes(path):
+  return send_from_directory("./static/codes/", path)
+
 from loopController.dataRequester import OneBusinessMain
-#modify the current place
+
+import certifi
+from pymongo import MongoClient
+ca = certifi.where()
+client = MongoClient("mongodb+srv://karla:0101.0101@maps.yasmsoc.mongodb.net/?retryWrites=true&w=majority", tlsCAFile=ca)
+db = client['mapsG']
+collec = db['places']
+
+from loopController.Qrgenerator import generateQRCode
+
 @app.route('/place/<id>')
 def set_place(id):
   global current_search_place
-  db = []
-  #search in the database
-  if id in db:
+  #search in the database given the id
+  data = collec.find_one({'place_id':id})
+  if data:
     #if it is the database, return that data
-    return {}
+    current_search_place = Place(data)
+    return 'ok'
   else:
     #else, scrap the data process return and save it
     print('scraping... '+id)
@@ -113,7 +127,9 @@ def set_place(id):
     print('scraped', data)
     current_search_place = placeTransform(data)
     requests.get(f'http://localhost:4000/img?url={current_search_place.data()["url"].split("=")[1]}&id={id}')
-    print('')
+    collec.insert_one(current_search_place.data())
+    if 'website' in data:
+      generateQRCode(data['website'], id)
     return 'ok'
 
 

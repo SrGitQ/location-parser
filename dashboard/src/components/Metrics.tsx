@@ -20,15 +20,16 @@ type Props = {
 	wordCloud: WordCount[] | null;
 	sentiment: Sentiment | null;
 	visitorData: VisitorData;
+    id:string;
 }
 
-const Metrics: React.FC <Props> = ({wordCloud, sentiment, visitorData}) => {
+const Metrics: React.FC <Props> = ({wordCloud, sentiment, visitorData, id}) => {
   return (
 		<div className='grid grid-cols-2 bg-color-red m-6 gap-6'>
 			<PeopleSays wordCloud={wordCloud}/>
 			<div className='grid gap-6'>
 				<HeadsUp sentiment={sentiment}/>
-				<Visitor visitorData={visitorData}/>
+				<Visitor visitorData={visitorData} id={id}/>
 			</div>
 		</div>
   );

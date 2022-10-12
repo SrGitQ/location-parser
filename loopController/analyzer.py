@@ -93,9 +93,12 @@ def countWords(reviews):
     if word not in stopwords_list:
       clean_words.append(word)
   fdist = FreqDist(clean_words)
-  top_10 = fdist.most_common(10)
+  try:
+    top_10 = fdist.most_common(20)
+  except:
+    top_10 = fdist.most_common(10)
   
-  data = [{'text':word[0], 'weight':word[1]} for word in top_10]
+  data = [{'text':word[0], 'value':word[1]} for word in top_10]
   return data
 
 # import nltk

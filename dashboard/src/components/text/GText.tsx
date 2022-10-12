@@ -6,7 +6,7 @@ type Props = {
 
 const GText: React.FC<Props> = ({title}) => {
     return (
-        <div className='text-5xl text-center'>
+        <div className='text-3xl text-center'>
             {title}
         </div>
     );

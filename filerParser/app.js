@@ -38,19 +38,19 @@ app.get('/', (req, res) => {
 	puppeteer.launch({
 		headless: true,
 		ignoreHTTPSErrors: true,
-		args: [`--window-size=1400,1900`],
+		args: [`--window-size=1400,1530`],
 		defaultViewport: {
 			width:1400,
-			height:1900
+			height:1530
 		}
 	}).then(async browser => {
 		const page = await browser.newPage();
-		await page.goto('http://localhost:3000/', {timeout: 60000});
+		await page.goto('http://localhost:3000/', {timeout: 80000});
 		await page.evaluate(async() => {
 			await new Promise(function(resolve) { 
 				setTimeout(resolve, 3000)
 			});
-			const toClick = document.querySelector('#root > div > div > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(2) > div > div > div:nth-child(14) > div > div:nth-child(3) > div > button:nth-child(3)');
+			const toClick = document.querySelector('button[aria-label="Zoom out"]');
 			toClick.click();
 			await new Promise(function(resolve) {setTimeout(resolve, 500)});
 			toClick.click();
