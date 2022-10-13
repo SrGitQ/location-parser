@@ -11,6 +11,7 @@ type Props = {
 const Competency: React.FC <Props> = ({competency}) => {
 	return (
 		<LBox>
+            <div className='h-[0.5rem]'></div>
 			<Title title='Competency'/>
 			<Cards competency={competency}/>
 		</LBox>

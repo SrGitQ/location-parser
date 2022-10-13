@@ -41,7 +41,7 @@ type Location = {
 	lng: number;
 }
 
-type Place = {
+type Place2 = {
 	name: string;
 	type: string;
 	phone: string;
@@ -60,5 +60,5 @@ type Place = {
     reviews: Array<number> | null;
 };
 
-
-export default Place
+//export place and place2
+export default Place2

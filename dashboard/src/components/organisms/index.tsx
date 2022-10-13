@@ -7,6 +7,7 @@ import Visitor from "./Visitor";
 import BusyDays from "./BusyDays";
 import BusyHours from "./BusyHours";
 import Cards from "./Cards";
+import Map_comp from "./Map_comp";
 
 export {
     PlaceInformation,
@@ -17,5 +18,6 @@ export {
     Visitor,
     BusyDays,
     BusyHours,
-    Cards
+    Cards,
+    Map_comp
 };

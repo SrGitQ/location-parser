@@ -14,7 +14,7 @@ const PlaceInformation: React.FC <Props> = ({place}) => {
 	const information = (
 		<div>
 			<Bullet>
-				<FontAwesomeIcon icon={solid('location-dot')}/> {place.address}
+				<FontAwesomeIcon icon={solid('location-dot')}/> {place.address.slice(0,30)}...
 			</Bullet>
 			<Bullet>
 				<FontAwesomeIcon icon={solid('phone')}/> {place.phone}

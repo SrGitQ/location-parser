@@ -61,6 +61,62 @@ class Place:
 			'busyHours':self.busyHours.data() if self.busyHours else {'hours':[]},
 		}
 
+class BasicPlace:
+  def __init__(self, place:any):
+    try:
+      self.name:str = place['name']
+    except:
+      self.name:str = ""
+    try:
+      self.type:str = place['types'][0]
+    except:
+      self.type:str = ""
+    try:
+      self.place_id:str = place['place_id']
+    except:
+      self.place_id:str = ""
+    try:
+      self.phone:str = place['formatted_phone_number']
+    except:
+      self.phone:str = ""
+    try:
+      self.status:str = place['opening_hours']['open_now']
+    except:
+      self.status:str = ""
+    try:
+      self.url:str = place['url']
+    except:
+      self.url:str = ""
+    try:
+      self.rating:str = place['rating']
+    except:
+      self.rating:str = ""
+    try:
+      self.address:str = place['formatted_address']
+    except:
+      self.address:str = ""
+    try:
+      self.location:Location = Location(place['geometry']['location'])
+    except:
+      self.location:Location = ""
+    try:
+      self.visitorData:VisitorData = VisitorData(place['website'])
+    except:
+      self.visitorData:VisitorData = ""
+  def data(self):
+    return {
+			'name':self.name,
+			'type':self.type,
+			'url':self.url,
+			'place_id':self.place_id,
+			'phone':self.phone,
+			'status':self.status,
+			'rating':self.rating,
+			'location':self.location.data() if self.location else "",
+			'address':self.address,
+			'visitorData':self.visitorData.data() if self.visitorData else None,
+		}
+
 class Img:
 	def __init__(self, src:str):
 		self.src:str = src
@@ -69,12 +125,11 @@ class Img:
 		return self.src
 
 class Location:
-	def __init__(self, location:dict):
-		self.lat:float = location['lat']
-		self.lng:float = location['lng']
-
-	def data(self):
-		return {
+  def __init__(self, location:dict):
+    self.lat:float = location['lat'] if 'lat' in location else None
+    self.lng:float = location['lng'] if 'lng' in location else None
+  def data(self):
+    return {
 			'lat':self.lat,
 			'lng':self.lng,
 		}

@@ -117,9 +117,37 @@ def getOneBusiness(placeID):
     extraData = getDetailData(placeID)
 
     results = MergeDict(data['result'], extraData)
-
+    print(results)
     return results
 
+def getOneBusinessStandar(placeID):
+    """
+    Function to search a specific place given a query using place from places API
+    """
+    # Endpoint
+    endpoint_url = 'https://maps.googleapis.com/maps/api/place/details/json'
+    
+    # API GOOGLE
+    API_KEY='AIzaSyCFXJsJDyC32kIJ2AHu2IMF1-osa6uKwSo'
+
+    # Parameters
+    params = {
+        'place_id': placeID,
+        'key': API_KEY,
+        'language': 'es'
+    }
+
+    # Request
+    response = requests.get(endpoint_url, params = params)
+
+    # Results
+    data = json.loads(response.content)
+
+    # extraData = getDetailData(placeID)
+
+    # results = MergeDict(data['result'], extraData)
+    print(data['result'])
+    return data['result']
 
 def getMultipleBusiness(query,lat,lon,radius):
   """
@@ -187,9 +215,9 @@ from loopController.analyzer import countWords, distribution
 from loopController.variables import Place
 
 def placeTransform(data):
-  if data['popular_times'] != None:
+  try:
     hours, days = distribution(data['popular_times'])
-  else:
+  except:
     hours, days = {'hours':[]},{'days':[]}
   
   if 'opening_hours' in data:
@@ -214,20 +242,20 @@ def placeTransform(data):
   print('from data request: ', data, words)
   return Place({
 	  'img':{'src':f'http://localhost:5000/static/imgs/{data["place_id"]}.png'},
-    'place_id': data['place_id'],
+    'place_id': data['place_id'] if 'place_id' in data else '',
 	  'name':data['name'],
 	  'type':data['types'][0],
     'url':data['url'],
 	  'phone':phone,
 	  'status':status,
-	  'rating':data['rating'],
-	  'location':data['location'],
-	  'address':data['formatted_address'],
+	  'rating':data['rating'] if 'rating' in data else 0,
+	  'location':data['location'] if 'location' in data else '',
+	  'address':data['formatted_address'] if 'formatted_address' in data else '',
 	  'visitorData':{'url':website},
 	  'busyDays': days,
-	  'sentiment':{'positive':420, 'neutral': 20, 'negative': 30},
+	  'sentiment':{'positive':20, 'neutral': 20, 'negative': 30},
 	  'wordCloud':words,
-	  'reviews':[data['reviews_per_score'][r] for r in data['reviews_per_score']],
+	  'reviews':[data['reviews_per_score'][r] for r in data['reviews_per_score']] if 'reviews_per_score' in data else [],
 	  'busyHours': hours
   })
 

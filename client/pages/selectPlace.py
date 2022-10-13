@@ -128,10 +128,12 @@ with col2:
         requests.get(f'http://localhost:5000/compare/{place["place_id"]}')
         #then search by the type and add the id in the list
         for type in st.session_state['types']:
-          current += getMultipleBusiness(type, place['geometry']['location']['lat'], place['geometry']['location']['lng'], st.session_state['radius'])[:3]
+          current += getMultipleBusiness(type, place['geometry']['location']['lat'], place['geometry']['location']['lng'], st.session_state['radius'])[:5]
+        
         for id in current:
           requests.get(f'http://localhost:5000/compare/{id["place_id"]}')
         requests.get('http://localhost:5000/compare/scrape')
+        switch_page('place')
 
 
 sidebarHidden()

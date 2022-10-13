@@ -6,16 +6,16 @@ type Props = {
   place: Place | null;
 };
 
-const Layout: React.FC <Props> = ({place}) => {
+const Layout2: React.FC <Props> = ({place}) => {
     return place ? (
         
       <div className="grid-rows-4">
         <BasicInformation place={place}/>
         <Metrics wordCloud={place.wordCloud} sentiment={place.sentiment} visitorData={place.visitorData} id={place.place_id}/>
         <Charts busyDays={place.busyDays} busyHours={place.busyHours}/>
-        {place.competency ? <Competency competency={place.competency}/> : null}
+        {/* <Competency competency={place.competency}/> */}
       </div>
     ) : (<></>)
 }
 
-export default Layout;
+export default Layout2;

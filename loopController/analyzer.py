@@ -77,7 +77,10 @@ def day_distribution(days):
   return aux_days
 
 def countWords(reviews):
-  res = [sub.split() for sub in reviews]
+  try:
+    res = [sub.split() for sub in reviews]
+  except:
+    return []
   
   #list of stopwords
   stopwords_list = stopwords.words("spanish")

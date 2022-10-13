@@ -12,13 +12,13 @@ const BulletPlaceInformtion: React.FC <BulletsProps> = ({place}) => {
 	const information = (
 		<div className=''>
             <div className='text-neutral-400 text-[0.8rem]'>
-				<FontAwesomeIcon icon={solid('location-dot')}/> {place.address}
+				<FontAwesomeIcon icon={solid('location-dot')}/> {place.address.slice(0,15)}...
             </div>
             <div className='text-neutral-400 text-[0.8rem]'>
 				<FontAwesomeIcon icon={solid('phone')}/> {place.phone}
             </div>
             <div className='text-neutral-400 text-[0.8rem]'>
-				<FontAwesomeIcon icon={solid('shop')}/> {place.type} <span className={place.status === 'Closed' ? 'text-red-600': 'text-green-600'}>{place.status}</span>
+				<FontAwesomeIcon icon={solid('shop')}/> {place.type} <span className={place.status === 'Closed' ? 'text-red-600': 'text-green-600'}>{place.status}  </span>
             </div>
 		</div>
 	);
@@ -29,8 +29,9 @@ const BulletPlaceInformtion: React.FC <BulletsProps> = ({place}) => {
 				{image}
 			</div>
 			<div className='basis-2/3'>
-				{place.name}
+				{place.name}  {place.rating}⭑
 				{information}
+                
 			</div>
 		</div>
 	);
@@ -42,8 +43,8 @@ type CardInfo = {
 
 const Card: React.FC <CardInfo> = ({place}) => {
     return (
-        <div className='h-[130px] bg-zinc-200 w-[300px] p-1 rounded-lg'>
-            <BulletPlaceInformtion place={place}/>
+        <div className='h-[160px] bg-zinc-200 w-[300px] p-1 rounded-lg'>
+            <a href={'http://localhost:5000/place/'+place.place_id}><BulletPlaceInformtion place={place}/></a>
         </div>
     );
 };
@@ -54,7 +55,7 @@ type CardsComp = {
 
 const Cards: React.FC <CardsComp> = ({competency}) => {
     const layout = (
-        <div className='grid grid-cols-4 gap-3 m-4 h-[360px]'>
+        <div className='grid grid-cols-4 gap-3 m-4 h-[4rem]'>
             {competency?.map((place, index) => (
                 <Card place={place} key={index}/>
             ))}
