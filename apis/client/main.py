@@ -4,6 +4,7 @@ from utils import writeR, sidebarHidden, headerRender, styleCharger, headerRende
 
 #config streamlit to wide mode
 st.set_page_config(layout="wide")
+st.theme = 'light'
 styleCharger()
 headerRender('<h1 style="text-align: center; font-family:helvetica">IMaP</h1>')
 headerRender('<br><br><p style="text-align: center; font-family:helvetica; color:#8e9297">Select an option...</p><br>')

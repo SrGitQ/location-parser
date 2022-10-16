@@ -21,7 +21,7 @@ app.get('/img', (req, res) => {
             bar.style.display = 'none';
         });
 
-		await element.screenshot({path: '../loopController/static/imgs/'+id+'.png'});
+		await element.screenshot({path: '../sessionMng/static/imgs/'+id+'.png'});
 		
 		await browser.close();
 		console.log('done');
@@ -66,7 +66,7 @@ app.get('/', (req, res) => {
 			toClick.click();
 		});
 		  
-		await page.screenshot({ path: '../loopController/static/fullpage.png', fullPage: true });
+		await page.screenshot({ path: '../sessionMng/static/fullpage.png', fullPage: true });
 		
 		await browser.close();
 		console.log('done');

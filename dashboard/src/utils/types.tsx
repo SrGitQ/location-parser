@@ -11,9 +11,6 @@ type Sentiment = {
 	negative: number;
 }
 
-type VisitorData = {
-	url: string;
-}
 
 type DayTendency = {
 	day: string;
@@ -51,9 +48,11 @@ type Place = {
 	address: string;
 	img: Img | null;
 	location: Location;
-	visitorData: VisitorData;
+	ratings_total: number;
+	url: string;
+	website: string;
 	busyDays: BusyDays | null;
-	competency: Place[] | null;
+	competency: Place[];
 	sentiment: Sentiment | null;
 	busyHours: BusyHours | null;
 	wordCloud: WordCount[] | null;

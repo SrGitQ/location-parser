@@ -11,7 +11,7 @@ const Layout2: React.FC <Props> = ({place}) => {
         
       <div className="grid-rows-4">
         <BasicInformation place={place}/>
-        <Metrics wordCloud={place.wordCloud} sentiment={place.sentiment} visitorData={place.visitorData} id={place.place_id}/>
+        <Metrics wordCloud={place.wordCloud} sentiment={place.sentiment} website={place.website} id={place.place_id}/>
         <Charts busyDays={place.busyDays} busyHours={place.busyHours}/>
         {/* <Competency competency={place.competency}/> */}
       </div>

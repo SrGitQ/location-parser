@@ -318,6 +318,7 @@ const Mapper: React.FC <Props> = ({location}) => {
 }
 
 const Map: React.FC <Props> = ({location}) => {
+	console.log(location)
     return (
         <MBox>
             <Title title='Map'/>

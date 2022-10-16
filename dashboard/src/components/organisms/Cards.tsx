@@ -2,6 +2,7 @@ import React from 'react';
 import Place from '../../utils/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
+import Bullet from '../text/Bullet';
 
 type BulletsProps = {
     place: Place;
@@ -11,13 +12,13 @@ const BulletPlaceInformtion: React.FC <BulletsProps> = ({place}) => {
 	const image = (<img className='rounded-full h-16 w-16' src='https://www.collinsdictionary.com/images/full/restaurant_135621509_1000.jpg?version=4.0.279' alt='swipe'/>);
 	const information = (
 		<div className=''>
-            <div className='text-neutral-400 text-[0.8rem]'>
+            <div className='text-neutral-400 text-[0.2rem]'>
 				<FontAwesomeIcon icon={solid('location-dot')}/> {place.address.slice(0,15)}...
             </div>
-            <div className='text-neutral-400 text-[0.8rem]'>
+            <div className='text-neutral-400 text-[0.2rem]'>
 				<FontAwesomeIcon icon={solid('phone')}/> {place.phone}
             </div>
-            <div className='text-neutral-400 text-[0.8rem]'>
+            <div className='text-neutral-400 text-[0.2rem]'>
 				<FontAwesomeIcon icon={solid('shop')}/> {place.type} <span className={place.status === 'Closed' ? 'text-red-600': 'text-green-600'}>{place.status}  </span>
             </div>
 		</div>
@@ -42,9 +43,22 @@ type CardInfo = {
 }
 
 const Card: React.FC <CardInfo> = ({place}) => {
+	const image = (<img className='rounded-full h-24 w-24 m-auto' src='https://www.collinsdictionary.com/images/full/restaurant_135621509_1000.jpg?version=4.0.279' alt='swipe'/>);
+
     return (
-        <div className='h-[160px] bg-zinc-200 w-[300px] p-1 rounded-lg'>
-            <a href={'http://localhost:5000/place/'+place.place_id}><BulletPlaceInformtion place={place}/></a>
+        <div className='h-64 bg-zinc-200 w-44 p-1 rounded-lg p-4'>
+			{image}
+			<div className='pt-1'>
+				<Bullet>
+					{place.name}
+				</Bullet>
+				<Bullet>
+					<FontAwesomeIcon icon={solid('phone')}/> {place.phone}
+				</Bullet>
+				<Bullet>
+					<FontAwesomeIcon icon={solid('shop')}/> {place.type} <span className={place.status === 'Closed' ? 'text-red-600': 'text-green-600'}>{place.status}</span>
+				</Bullet>
+			</div>
         </div>
     );
 };
@@ -55,14 +69,15 @@ type CardsComp = {
 
 const Cards: React.FC <CardsComp> = ({competency}) => {
     const layout = (
-        <div className='grid grid-cols-4 gap-3 m-4 h-[4rem]'>
+        <div className='grid grid-cols-3 gap-3 m-4 h-[4rem]'>
+			
             {competency?.map((place, index) => (
                 <Card place={place} key={index}/>
             ))}
         </div>
     )
 
-    return (<>{layout}</>);
+    return (<><br/>{layout}</>);
 };
 
 export default Cards;

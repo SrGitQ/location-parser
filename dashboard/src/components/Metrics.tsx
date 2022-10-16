@@ -12,24 +12,21 @@ type Sentiment = {
 	negative: number;
 }
 
-type VisitorData = {
-	url: string;
-}
 
 type Props = {
 	wordCloud: WordCount[] | null;
 	sentiment: Sentiment | null;
-	visitorData: VisitorData;
+	website: string;
     id:string;
 }
 
-const Metrics: React.FC <Props> = ({wordCloud, sentiment, visitorData, id}) => {
+const Metrics: React.FC <Props> = ({wordCloud, sentiment, website, id}) => {
   return (
 		<div className='grid grid-cols-2 bg-color-red m-6 gap-6'>
 			<PeopleSays wordCloud={wordCloud}/>
 			<div className='grid gap-6'>
 				<HeadsUp sentiment={sentiment}/>
-				<Visitor visitorData={visitorData} id={id}/>
+				<Visitor website={website} id={id}/>
 			</div>
 		</div>
   );

@@ -13,7 +13,7 @@ const BasicInformation: React.FC<Props> = ({place}) => {
 
     let competency = () => {
         if(place.competency){
-            return <Map_comp location={place.location} markers={place?.competency?.map(e=>e.location)}/>
+            return <Map_comp location={place.location} markers={place.competency.map(e=>e.location)}/>
         }else {
             return <Map location={place.location}/>
         }
@@ -26,7 +26,7 @@ const BasicInformation: React.FC<Props> = ({place}) => {
 				<Rating reviews={place.reviews} rating={place.rating}/>
 			</div>
 			<div>
-                {competency()}
+				{competency()}
 			</div>
 		</div>
 	);
