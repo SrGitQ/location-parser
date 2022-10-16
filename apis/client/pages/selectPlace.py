@@ -44,7 +44,7 @@ with col_3:
     </style>
   """)
   if st.button('⌂'):
-    requests.get('http://localhost:5000/compare/reset')
+    # requests.get('http://localhost:5000/compare/reset')
     switch_page('main')
 
 def go_to_place(id_):
